@@ -8,15 +8,17 @@ export const register = (req, res) => {
 };
 
 export const login = (req, res) => {
-  Login(req.body, (err, result) => {
-    if(err) res.json(err);
-    res.json(result);
+  return Login(req.body, (err, {token, ...user}) => {
+    if(err) next(err);
+    res
+      .cookie('token', token, {httpOnly: true})
+      .json({user});
   })
 };
 
 export const validate_token = (req, res) => {
   const {token} = req.body;
-  let validate = Validate(token,(err, result) => {
+  Validate(token,(err, result) => {
     if(err) res.json(err.message);
     res.json(result);
   })

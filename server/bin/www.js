@@ -3,7 +3,6 @@
 /**
  * Module dependencies.
  */
-
 import debugPkg from 'debug';
 import http from 'http';
 import app from '../app';
