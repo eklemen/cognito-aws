@@ -4,7 +4,7 @@ import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import helmet from 'helmet';
 import logger from 'morgan';
-import mongoose from 'mongoose';
+// import mongoose from 'mongoose';
 
 // Middlewares
 import {validateJwt} from './middlewares/cognitojwt';
@@ -16,9 +16,9 @@ import authRouter from './routes/auth';
 const app = express();
 
 // database setup
-const mongoUri = process.env.MONGODB_URI || 'mongodb://localhost/mydb';
-const mongooseConfigs = { useNewUrlParser: true, useUnifiedTopology: true };
-mongoose.connect(mongoUri, mongooseConfigs);
+// const mongoUri = process.env.MONGODB_URI || 'mongodb://localhost/mydb';
+// const mongooseConfigs = { useNewUrlParser: true, useUnifiedTopology: true };
+// mongoose.connect(mongoUri, mongooseConfigs);
 
 
 app.use(logger('dev'));
