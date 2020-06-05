@@ -5,9 +5,8 @@ import jwt from 'jsonwebtoken';
 let retryCount = 0;
 let pems;
 const getPems = () => {
-  const pool_region = 'us-east-1';
   axios({
-    url: `https://cognito-idp.${pool_region}.amazonaws.com/${process.env.AWS_USER_POOL_ID}/.well-known/jwks.json`
+    url: `https://cognito-idp.${process.env.AWS_POOL_REGION}.amazonaws.com/${process.env.AWS_USER_POOL_ID}/.well-known/jwks.json`
   }).then(({data}) => {
     const pemsObj = {};
     const keys = data['keys'];
@@ -22,11 +21,11 @@ const getPems = () => {
     pems = pemsObj;
   }).catch(err => {
     if (retryCount<9) {
-      console.log(`Failed to retrieve jwks, retrying...${9-retryCount} attempts left.`);
+      console.warn(`Failed to retrieve jwks, retrying...${9-retryCount} attempts left.`);
       retryCount++;
       getPems()
     } else {
-      throw new Error('Could not fetch jwks:  ' + err);
+      console.error('Could not fetch jwks:  ' + err);
     }
   })
 };
@@ -38,9 +37,8 @@ export const validateJwt = (opts) => (req, res, next) => {
   } else {
     const {token} = req.cookies;
     const decodedJwt = jwt.decode(token, {complete: true});
-    if (!decodedJwt) {
-      return res.sendStatus(401);
-    }
+    if (!decodedJwt) return res.sendStatus(401);
+
     const kid = decodedJwt.header.kid;
     const pem = pems[kid];
     if (!pem) {

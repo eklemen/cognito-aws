@@ -1,14 +1,10 @@
-import axios from 'axios';
 global.fetch = require('node-fetch');
 import * as AmazonCognitoIdentity from 'amazon-cognito-identity-js';
-import jwkToPem from 'jwk-to-pem';
-import jwt from 'jsonwebtoken';
 
 const poolData = {
   UserPoolId: process.env.AWS_USER_POOL_ID,
   ClientId: process.env.AWS_CLIENT_ID
 };
-const pool_region = "us-east-1";
 const userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
 export const Register = (body, callback) => {
   const {name, email, password} = body;
