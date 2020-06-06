@@ -1,7 +1,7 @@
 version: 0.0
 os: linux
 files:
-  - source: /
+  - source: $CODEBUILD_SRC_DIR
     destination: /usr/exgenaws
     overwrite: true
 hooks:
