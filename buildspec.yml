@@ -19,6 +19,9 @@ phases:
   post_build:
     commands:
       - echo Build completed on `date`
+      - ls -al ./dist
 artifacts:
   files:
-    - dist/*
+    - dist/**/*
+    - appspec.yml
+    - scripts/*
