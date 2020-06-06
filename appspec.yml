@@ -1,7 +1,7 @@
 version: 0.0
 os: linux
 files:
-  - source: $CODEBUILD_SRC_DIR
+  - source: /codebuild-cognito
     destination: /usr/exgenaws
     overwrite: true
 hooks:
