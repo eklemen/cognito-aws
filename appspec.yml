@@ -1,7 +1,7 @@
 version: 0.0
 os: linux
 files:
-  - source: /codebuild-cognito
+  - source: /
     destination: /usr/exgenaws
     overwrite: true
 hooks:
