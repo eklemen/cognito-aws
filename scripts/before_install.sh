@@ -12,8 +12,6 @@ export app_root=/usr/exgenaws
 if [ -d "$app_root" ];then
     rm -rf /usr/exgenaws
     mkdir -p /usr/exgenaws
-    ls -al /usr
 else
     mkdir -p /usr/exgenaws
-    ls -al /usr
 fi
