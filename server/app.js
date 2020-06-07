@@ -28,14 +28,14 @@ app.use(cookieParser());
 app.use(helmet());
 app.use(cors());
 app.use(compression());
-app.use(validateJwt({whitelist: ['/auth']}));
+app.use(validateJwt({whitelist: ['/auth', '/healthcheck']}));
 
 app.use('/auth', authRouter);
 app.use('/api', indexRouter);
 app.use('/api/users', usersRouter);
 
-app.use('/', (_, res) => {
-  res.send('healthy');
+app.use('/healthcheck', (_, res) => {
+  res.sendStatus(200);
 });
 
 module.exports = app;
