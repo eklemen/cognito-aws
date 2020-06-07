@@ -34,4 +34,8 @@ app.use('/auth', authRouter);
 app.use('/api', indexRouter);
 app.use('/api/users', usersRouter);
 
+app.use('/', (_, res) => {
+  res.send('healthy');
+});
+
 module.exports = app;
